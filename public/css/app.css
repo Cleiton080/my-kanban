@@ -1,0 +1,269 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css?family=Mansalva|Montserrat&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+}
+
+a {
+  color: #1f5e9c;
+  text-decoration: none;
+}
+
+a:hover { text-decoration: underline; }
+
+:root { background-color: #363b41; }
+
+.container { padding: 2em 1em; }
+
+.right { float: right; }
+
+.left { float: left; }
+
+.text-red { color: rgb(192, 20, 20); }
+
+.title { font-family: 'Mansalva', cursive; }
+
+.d-flex,
+.navbar { display: flex; }
+
+.row {
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.row-wrap { flex-wrap: wrap; }
+
+.justify-content-center{ justify-content: center; }
+
+.align-items-center { align-items: center; }
+
+.justify-content-between { justify-content: space-between; }
+
+.text-center { text-align: center; }
+
+.divide { margin: 2em 0; }
+
+.user-profile {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  padding: .5em;
+}
+
+/**
+ * FORM
+*/
+
+form { width: 100%; }
+
+.btn { cursor: pointer; }
+
+.btn-std {
+  width: 5em;
+  padding: .2em 0;
+  border-radius: .2em;
+}
+
+.btn-block { width: 100%; }
+
+.btn-gray {
+  background-color: #434a52;
+  color: #fff;
+}
+
+.btn-blue {
+  background-color: #1f5e9c;
+  color: #fff;
+}
+
+.btn-gray:hover,
+.btn-gray:focus { background-color: #555b63; }
+
+.btn-blue:hover,
+.btn-blue:focus { background-color: #2a6cad; }
+
+.btn,
+.input-control {
+  border: none;
+  transition: background-color .5s;
+  outline: 0;
+}
+
+.input-control,
+.btn-block {
+  width: 100%;
+  border-radius: .5em;
+}
+
+.input-control {
+  background-color: #434a52;
+  color: #fff;
+}
+
+.input-control:focus { background-color: #555b63; }
+
+::-webkit-input-placeholder { color: #929496; }
+
+.input-group,
+.input-group-label { display: flex; }
+
+.form-group,
+.input-group { margin: 1em; }
+
+.input-group input {
+  width: 85%;
+  border-radius: 0 .5em .5em 0;
+}
+
+.input-group-label {
+  width: 15%;
+  background-color: #2c3036;
+  color: #fff;
+  border-radius: .5em 0 0 .5em;
+  align-items: center;
+  justify-content: center;
+}
+
+/**
+ * Nav / Navbar
+*/
+
+.nav {
+  background-color: rgba(44, 48, 54, 1);
+  color: #fff;
+  width: 20em;
+  height: 100vh;
+  position: fixed;
+  transition: background-color .5s;
+}
+
+.nav-brand,
+.nav-user { padding: 1em; }
+
+.nav-user {
+  background-color: #25282D;
+  margin-bottom: 1em;
+  text-align: center;
+  font-size: 10pt;
+}
+
+.nav-brand:first-child {
+  text-transform: uppercase;
+  font-size: 1em;
+  text-align: center;
+}
+
+.nav-body { list-style: none; }
+
+.nav-item {
+  padding: 1em;
+  cursor: pointer;
+}
+
+.nav-item:hover { background-color: #434a52; }
+
+.nav-active { background-color: #2a6cad; }
+
+.nav-active:hover { background-color: #21609E; }
+
+.nav-swipe {
+  color: #ccc;
+  cursor: pointer;
+  padding: .8em;
+  width: 1em;
+  border-radius: 0 1em 1em 0;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  display: flex;
+  justify-content: center;
+  transition: all .3s;
+}
+
+.nav:hover .nav-swipe { background-color: #2c3036; }
+
+.nav-swipe:hover { color: #fff; }
+
+.nav-off {
+  position: fixed;
+  left: -20em;
+}
+
+.nav-show {
+  position: relative;
+  left: 0;
+}
+
+.navbar {
+  justify-content:  flex-end;
+  height: 3.1em;
+  background-color: #2c3036;
+  color: #fff;
+}
+
+.navbar-brand-text {
+  font-family: 'Mansalva', cursive;
+  font-size: 1em;
+}
+
+a.navbar-brand-text {
+  font-size: 2.5em;
+  color: #fff;
+}
+
+a.navbar-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+ul.navbar-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-item {
+  display: flex;
+  padding: 0 1em;
+  height: 100%;
+  align-items: center;
+  font-size: smaller;
+}
+
+.navbar-item:hover .navbar-link { color: #1f5e9c; }
+
+/**
+ * Dropdown
+*/
+
+.dropdown-active:first-child { background-color: #212327; }
+
+.dropdown-menu {
+  display: none;
+  background-color: #25282D;
+  list-style: none;
+  box-shadow: 5px 5px 15px #25282D;
+  position: absolute;
+  width: 10em;
+  z-index: 1;
+}
+
+.dropdown-menu li {
+  padding: 1em;
+  cursor: pointer;
+}
+
+.dropdown-toggle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown-menu li:hover { background-color: #434a52; }
+
+.dropdown:hover .dropdown-menu { display: block; }
