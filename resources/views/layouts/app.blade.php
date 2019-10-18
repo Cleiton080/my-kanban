@@ -18,9 +18,10 @@
 
       .fa-users { color: #FFEAC4; }
 
-      .card { flex-grow: 2; }
-
     </style>
+
+    @yield('css')
+
     <!-- .Links / Styles -->
   </head>
   <body>

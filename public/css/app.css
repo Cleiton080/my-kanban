@@ -19,7 +19,7 @@ a:hover { text-decoration: underline; }
 
 :root { background-color: #363b41; }
 
-.container { padding: 2em 1em; }
+.container { padding: 3em; }
 
 .right { float: right; }
 
@@ -70,6 +70,12 @@ form { width: 100%; }
   border-radius: .2em;
 }
 
+.btn-xl {
+  width: 20em;
+  height: 5em;
+  border-radius: .5em;
+}
+
 .btn-block { width: 100%; }
 
 .btn-gray {
@@ -81,6 +87,14 @@ form { width: 100%; }
   background-color: #1f5e9c;
   color: #fff;
 }
+
+.btn-dark {
+  background: #42484f;
+  color: #fff;
+}
+
+.btn-dark:hover,
+.btn-dark:focus { background-color: #59616b; }
 
 .btn-gray:hover,
 .btn-gray:focus { background-color: #555b63; }
