@@ -19,25 +19,11 @@
 
     <div class="d-flex row-wrap">
 
+        @foreach($allProjects as $project)
         <button type="button" class="btn btn-xl btn-dark">
-            PPROJECT 1
+            {{ $project->name }}
         </button>
-
-        <button type="button" class="btn btn-xl btn-dark">
-            PPROJECT 2
-        </button>
-
-        <button type="button" class="btn btn-xl btn-dark">
-            PPROJECT 3
-        </button>
-
-        <button type="button" class="btn btn-xl btn-dark">
-            PPROJECT 4
-        </button>
-
-        <button type="button" class="btn btn-xl btn-dark">
-            PPROJECT 5
-        </button>
+        @endforeach
 
         <button type="button" class="btn btn-xl btn-dark">
             <i class="fas fa-plus"></i> &nbsp;NEW PROJECT

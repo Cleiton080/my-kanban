@@ -13,6 +13,4 @@
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'ProjectController@index');
