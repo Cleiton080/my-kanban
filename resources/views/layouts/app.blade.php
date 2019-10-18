@@ -43,13 +43,13 @@
 
           <ul class="nav-body">
             <li class="nav-item">
-              <i class="fas fa-star"></i> &nbsp;Favorites
+              <i class="fas fa-star"></i> &nbsp;Favoritos
             </li>
             <li class="nav-item">
-              <i class="fas fa-project-diagram"></i> &nbsp;Projects
+              <i class="fas fa-project-diagram"></i> &nbsp;Projetos
             </li>
             <li class="nav-item">
-              <i class="fas fa-users"></i> &nbsp;Teams
+              <i class="fas fa-users"></i> &nbsp;Equipes
             </li>
             <li class="nav-item" onclick="modal.open('github')">
               <i class="fab fa-github"></i> &nbsp;Github

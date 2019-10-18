@@ -355,3 +355,23 @@ ul.navbar-menu {
 .modal-close:focus { background-color: #F10D00; }
 
 @media screen and (max-width: 800px) { .modal-content { width: 80%; } }
+
+/* Context menu */
+.contextmenu {
+  position: absolute;
+  background-color: rgba(44, 48, 54, 1);
+  box-shadow: 3px 10px 10px rgba(44, 48, 54, 1);
+  display: none;
+}
+
+.contextmenu li {
+  padding: .5em;
+  list-style: none;
+  cursor: pointer;
+}
+
+.contextmenu li:hover { background-color: #1f5e9c; }
+
+.contextmenu,
+.contextmenu ul,
+.contextmenu li { border-radius: .3em; }

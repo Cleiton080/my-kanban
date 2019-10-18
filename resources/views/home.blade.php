@@ -12,18 +12,28 @@
 @section('content')
 
     <h3>
-        <i class="fas fa-project-diagram"></i> &nbsp;Projetos
+        <i class="fas fa-project-diagram"></i> &nbsp;PROJETOS
     </h3>
 
     <div class="divide"></div>
 
-    <div class="d-flex row-wrap">
+    <div class="d-flex row-wrap" id="projects">
 
         @foreach($allProjects as $project)
-        <button type="button" class="btn btn-xl btn-dark">
-            {{ $project->name }}
-        </button>
+            <button type="button" class="btn btn-xl btn-dark">
+                {{ $project->name }}
+            </button>
         @endforeach
+
+        <!-- Context menu -->
+        <div class="contextmenu">
+            <ul>
+                <li style="border-bottom: 1px solid #363b41;">Abrir</li>
+                <li>Editar</li>
+                <li>Deletar</li>
+                <li>Propriedades</li>
+            </ul>
+        </div>
 
         <button type="button" class="btn btn-xl btn-dark" onclick="modal.open('newProject')">
             <i class="fas fa-plus"></i> &nbsp;NEW PROJECT
@@ -61,6 +71,20 @@
             fadeIn: 100,
             fadeOut: 900,
         });
+
+        // Contextmenu
+        const ctx = document.querySelectorAll('#projects button');
+        const ctxMenuOptions = {
+            menu: document.querySelector('.contextmenu'),
+            display: {
+                show: 'block',
+                hidden: 'none'
+            }
+        };
+        const ctxMenuProject = contextmenu(ctxMenuOptions);
+        
+        Array.prototype.forEach.call(ctx, e => { e.addEventListener('contextmenu', ctxMenuProject.clickRight) });
+        window.addEventListener('click', ctxMenuProject.clickLeft);
 
     </script>
 @stop

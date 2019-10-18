@@ -42,3 +42,25 @@ Nav.prototype.click = function() {
         nav.classList.add('nav-show');
     }
 }
+
+// Contextmenu
+function contextmenu(o) {
+    let menu = o.menu;
+    let visible = false;
+    let display = o.display;
+
+    return {
+        clickRight: function(e) {
+            e.preventDefault();
+            if(visible) return;
+
+            menu.style.display = display.show;
+            menu.style.top = `${e.pageY}px`;
+            menu.style.left = `${e.pageX}px`;
+        },
+        clickLeft: function(e) {
+            if(e.button === 0)
+                menu.style.display = display.hidden;
+        }
+    }
+}
