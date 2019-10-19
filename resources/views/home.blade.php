@@ -20,7 +20,7 @@
     <div class="d-flex row-wrap" id="projects">
 
         @foreach($allProjects as $project)
-            <button type="button" class="btn btn-xl btn-dark">
+            <button type="button" class="btn btn-xl btn-dark" data-id="{{ $project->id }}">
                 {{ $project->name }}
             </button>
         @endforeach
@@ -30,7 +30,7 @@
             <ul>
                 <li style="border-bottom: 1px solid #363b41;">Abrir</li>
                 <li>Editar</li>
-                <li>Deletar</li>
+                <li onclick="modal.open('delete')">Deletar</li>
                 <li>Propriedades</li>
             </ul>
         </div>
@@ -41,9 +41,7 @@
     
     </div>
 
-    @component('components.modal')
-        @slot('id', 'newProject')
-        @slot('title', 'NOVO PROJETO')
+    @component('components.modal', ['id' => 'newProject', 'title' => 'NOVO PROJETO'])
         <form method="post" action="{{ route('project.create') }}">
             <div class="modal-body">
                 @csrf
@@ -61,10 +59,34 @@
         </form>
     @endcomponent
 
+    @component('components.modal', ['id' => 'delete', 'title' => 'DELETAR PROJETO'])
+        <form action="{{ route('project.delete') }}" method="post">
+            <div class="modal-body">
+                <p>
+                    <strong>Você realmente deseja deletar o projeto selecionado?</strong><br><br>
+                    <i>O item irá ser deletado imediatamente, a ação não poderá ser desfeita.</i>
+                </p>
+                @method('delete')
+                @csrf
+                <input type="hidden" name="id-project">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-std btn-blue" onclick="modal.close()">Cancelar</button>
+                <button type="submit" class="btn btn-std btn-gray">Deletar</button>
+            </div>
+        </form>
+    @endcomponent
+
 @stop
 
 @section('script')
     <script>
+
+        function bindId(id, match) {
+            let field = document.querySelector(match).value = id;
+
+            return field ? true : false
+        }
 
         // Modal inicial settings
         const modal = new Modal({
@@ -73,7 +95,7 @@
         });
 
         // Contextmenu
-        const ctx = document.querySelectorAll('#projects button');
+        const ctx = Array.from(document.querySelectorAll('#projects button'));
         const ctxMenuOptions = {
             menu: document.querySelector('.contextmenu'),
             display: {
@@ -82,8 +104,12 @@
             }
         };
         const ctxMenuProject = contextmenu(ctxMenuOptions);
+        const ctxClickRight = e => {
+            ctxMenuProject.clickRight(e);
+            bindId(ctxMenuProject.parentElement.getAttribute('data-id'), 'input[name=id-project]');
+        }
         
-        Array.prototype.forEach.call(ctx, e => { e.addEventListener('contextmenu', ctxMenuProject.clickRight) });
+        ctx.forEach(e => { e.addEventListener('contextmenu', ctxClickRight) })
         window.addEventListener('click', ctxMenuProject.clickLeft);
 
     </script>

@@ -45,4 +45,17 @@ class ProjectController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Delete the project
+     * 
+     * @return Illuminate\Routing\Redirector
+    */
+    public function delete()
+    {
+        $project = Project::findOrFail($this->request->input('id-project'));
+        $project->delete();
+
+        return redirect()->back();
+    }
 }

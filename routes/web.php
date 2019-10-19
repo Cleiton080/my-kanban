@@ -15,3 +15,4 @@ Auth::routes();
 
 Route::get('/', 'ProjectController@index');
 Route::post('/project/add', 'ProjectController@create')->name('project.create');
+Route::delete('/project/delete', 'ProjectController@delete')->name('project.delete');

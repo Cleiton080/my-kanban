@@ -91,9 +91,17 @@ form { width: 100%; }
 }
 
 .btn-dark {
-  background: #42484f;
+  background-color: #42484f;
   color: #fff;
 }
+
+.btn-red {
+  background-color: #C62C24;
+  color: #fff;
+}
+
+.btn-red:hover,
+.btn-red:focus { background-color: #F10D00; }
 
 .btn-dark:hover,
 .btn-dark:focus { background-color: #59616b; }

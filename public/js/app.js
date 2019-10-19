@@ -48,6 +48,7 @@ function contextmenu(o) {
     let menu = o.menu;
     let visible = false;
     let display = o.display;
+    let parentElement = null;
 
     return {
         clickRight: function(e) {
@@ -57,10 +58,14 @@ function contextmenu(o) {
             menu.style.display = display.show;
             menu.style.top = `${e.pageY}px`;
             menu.style.left = `${e.pageX}px`;
+            parentElement = e.originalTarget;
         },
         clickLeft: function(e) {
             if(e.button === 0)
                 menu.style.display = display.hidden;
+        },
+        get parentElement() {
+            return parentElement;
         }
     }
 }
