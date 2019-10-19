@@ -1,3 +1,9 @@
+function bindId(id, match) {
+    let field = document.querySelector(match).value = id;
+
+    return field ? true : false
+}
+
 /**
  * Modal
 */
@@ -44,28 +50,23 @@ Nav.prototype.click = function() {
 }
 
 // Contextmenu
-function contextmenu(o) {
-    let menu = o.menu;
-    let visible = false;
-    let display = o.display;
-    let parentElement = null;
+function ContextMenu(o) {
+    this.menu = o.menu;
+    this.visible = false;
+    this.display = o.display;
+    this.parentElement = null;
+}
 
-    return {
-        clickRight: function(e) {
-            e.preventDefault();
-            if(visible) return;
+ContextMenu.prototype.clickRight = function(e) {
+    e.preventDefault();
+    if(this.visible) return;
 
-            menu.style.display = display.show;
-            menu.style.top = `${e.pageY}px`;
-            menu.style.left = `${e.pageX}px`;
-            parentElement = e.originalTarget;
-        },
-        clickLeft: function(e) {
-            if(e.button === 0)
-                menu.style.display = display.hidden;
-        },
-        get parentElement() {
-            return parentElement;
-        }
-    }
+    this.menu.style.display = this.display.show;
+    this.menu.style.top = `${e.pageY}px`;
+    this.menu.style.left = `${e.pageX}px`;
+    this.parentElement = e.originalTarget;
+}
+
+ContextMenu.prototype.clickLeft = function(e) {
+    if(e.button === 0) this.menu.style.display = this.display.hidden;
 }

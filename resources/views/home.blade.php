@@ -82,12 +82,6 @@
 @section('script')
     <script>
 
-        function bindId(id, match) {
-            let field = document.querySelector(match).value = id;
-
-            return field ? true : false
-        }
-
         // Modal inicial settings
         const modal = new Modal({
             fadeIn: 100,
@@ -96,21 +90,20 @@
 
         // Contextmenu
         const ctx = Array.from(document.querySelectorAll('#projects button'));
-        const ctxMenuOptions = {
+        const ctxMenuProject = new ContextMenu({
             menu: document.querySelector('.contextmenu'),
             display: {
                 show: 'block',
                 hidden: 'none'
             }
-        };
-        const ctxMenuProject = contextmenu(ctxMenuOptions);
+        });
         const ctxClickRight = e => {
             ctxMenuProject.clickRight(e);
             bindId(ctxMenuProject.parentElement.getAttribute('data-id'), 'input[name=id-project]');
         }
         
         ctx.forEach(e => { e.addEventListener('contextmenu', ctxClickRight) })
-        window.addEventListener('click', ctxMenuProject.clickLeft);
+        window.addEventListener('click', e => { ctxMenuProject.clickLeft(e) });
 
     </script>
 @stop
