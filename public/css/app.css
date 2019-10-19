@@ -12,6 +12,11 @@
 
 textarea { resize: none; }
 
+hr {
+  margin: .5em 0;
+  border: 1px solid rgba(44, 48, 54, 1);
+}
+
 a {
   color: #1f5e9c;
   text-decoration: none;

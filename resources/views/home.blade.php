@@ -19,27 +19,35 @@
 
     <div class="d-flex row-wrap" id="projects">
 
+        <!-- All projects -->
         @foreach($allProjects as $project)
             <button type="button" class="btn btn-xl btn-dark" data-id="{{ $project->id }}">
                 {{ $project->name }}
             </button>
         @endforeach
+        <!-- .All projects -->
 
-        <!-- Context menu -->
+        <!-- Contextmenu -->
         <div class="contextmenu">
             <ul>
                 <li style="border-bottom: 1px solid #363b41;">Abrir</li>
-                <li>Editar</li>
                 <li onclick="modal.open('delete')">Deletar</li>
-                <li>Propriedades</li>
+                <li onclick="modal.open('addToFavorites')">Adicionar aos favoritos</li>
             </ul>
         </div>
-
-        <button type="button" class="btn btn-xl btn-dark" onclick="modal.open('newProject')">
-            <i class="fas fa-plus"></i> &nbsp;NEW PROJECT
-        </button>
+        <!-- .Contextmenu -->
     
     </div>
+
+    <hr>
+
+    <!-- New project button -->
+    <div class="">
+        <button type="button" class="btn btn-block btn-xl btn-dark" onclick="modal.open('newProject')">
+            <i class="fas fa-plus"></i> &nbsp;NOVO PROJETO
+        </button>
+    </div>
+    <!-- .New project button -->
 
     @component('components.modal', ['id' => 'newProject', 'title' => 'NOVO PROJETO'])
         <form method="post" action="{{ route('project.create') }}">
