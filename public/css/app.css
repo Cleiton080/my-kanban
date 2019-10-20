@@ -71,6 +71,13 @@ form { width: 100%; }
 
 .btn { cursor: pointer; }
 
+a.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
 .btn-std {
   width: 5em;
   padding: .2em 0;
@@ -133,7 +140,7 @@ form { width: 100%; }
 .input-control {
   background-color: #434a52;
   color: #fff;
-  padding: .3em;
+  padding: .5em;
 }
 
 .input-control:focus { background-color: #555b63; }
@@ -388,3 +395,26 @@ ul.navbar-menu {
 .contextmenu,
 .contextmenu ul,
 .contextmenu li { border-radius: .3em; }
+
+.stage-card {
+  background-color: #434a52;
+  width: 16em;
+}
+
+.stage-card,
+.stage-card-task { border-radius: .2em; }
+
+.stage-card-head,
+.stage-card-body,
+.stage-card-task { padding: .5em; }
+
+.stage-card-tasks {
+  list-style: none;
+  margin: .2em;
+}
+
+.stage-card-task {
+  background-color: #25282D;
+  margin-bottom: .5em;
+  cursor: pointer;
+}

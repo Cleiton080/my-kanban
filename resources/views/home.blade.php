@@ -21,9 +21,9 @@
 
         <!-- All projects -->
         @foreach($allProjects as $project)
-            <button type="button" class="btn btn-xl btn-dark" data-id="{{ $project->id }}">
+            <a href="{{ route('project.board', ['id' => $project->id]) }}" class="btn btn-xl btn-dark" data-id="{{ $project->id }}">
                 {{ $project->name }}
-            </button>
+            </a>
         @endforeach
         <!-- .All projects -->
 
@@ -32,7 +32,6 @@
             <ul>
                 <li style="border-bottom: 1px solid #363b41;">Abrir</li>
                 <li onclick="modal.open('delete')">Deletar</li>
-                <li onclick="modal.open('addToFavorites')">Adicionar aos favoritos</li>
             </ul>
         </div>
         <!-- .Contextmenu -->
@@ -97,7 +96,7 @@
         });
 
         // Contextmenu
-        const ctx = Array.from(document.querySelectorAll('#projects button'));
+        const ctx = Array.from(document.querySelectorAll('#projects a'));
         const ctxMenuProject = new ContextMenu({
             menu: document.querySelector('.contextmenu'),
             display: {
@@ -105,11 +104,14 @@
                 hidden: 'none'
             }
         });
+
+        // ...
         const ctxClickRight = e => {
             ctxMenuProject.clickRight(e);
             bindId(ctxMenuProject.parentElement.getAttribute('data-id'), 'input[name=id-project]');
         }
         
+        // Event's contextmenu
         ctx.forEach(e => { e.addEventListener('contextmenu', ctxClickRight) })
         window.addEventListener('click', e => { ctxMenuProject.clickLeft(e) });
 
