@@ -25,7 +25,7 @@
     <div class="d-flex row-wrap">
         
         @foreach($project->stages as $stage)
-            <div class="stage-card" style="flex-grow: 2; margin: 1em;">
+            <div class="stage-card" style="flex-grow: 2; margin: 1em;" data-id="{{ $stage->id }}">
                 <div class="stage-card-head d-flex justify-content-between">
                     <h4>{{ $stage->title }}</h4>
                     <button type="button" class="btn btn-dark" style="padding: 0 .5em; border-radius: 50%;">
@@ -38,7 +38,7 @@
                             <li class="stage-card-task">{{ $task->title }}</li>
                         @endforeach
                     </ul>
-                    <button type="button" class="btn btn-block btn-dark" style="font-size: .8em; padding: .5em;" onclick="newTask(this)">
+                    <button type="button" class="btn btn-block btn-dark" style="font-size: .8em; padding: .5em;">
                         <i class="fas fa-plus"></i> &nbsp;ADICIONAR NOVA TAREFA
                     </button>
                 </div>
@@ -52,48 +52,51 @@
 
 @section('script')
     <script>
-
-        function addTask(tasks, input) {
-
-            if(!input.value) { input.remove(); return ; }
-
+        // Tasks
+        function createTask(e) {
+            const tasks = e.originalTarget.parentElement.querySelector('.stage-card-tasks');
+            const input = document.createElement('input');
             const li = document.createElement('li');
 
-            li.classList.add('stage-card-task');
-            li.innerHTML = input.value;
-            li.setAttribute('draggable', true);
-
-            $.ajax({
-                type: 'POST',
-                url: '/project/task/add',
-                data: {title: input.value, stage_id: 1},
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(err) {
-                    console.log(err);
-                }
-            });
-
-            tasks.appendChild(li);
-
-            input.remove();
-        }
-
-        function newTask(o) {
-            const tasks = o.parentElement.querySelector('.stage-card-tasks');
-            const input = document.createElement('input');
-            
-            input.type = 'text';
-            input.classList.add('input-control');
-
+            // input
+            input.setAttribute('class', 'input-control');
             tasks.appendChild(input);
             input.focus();
+            
+            // li
+            li.setAttribute('class', 'stage-card-task');
 
-            input.addEventListener('focusout', () => { addTask(tasks, input) });
+            // Add li and remove input
+            input.addEventListener('focusout', function(e) {
+
+                if(!input.value) { input.remove(); return; }
+
+                li.appendChild(document.createTextNode(input.value));
+                tasks.appendChild(li);
+                saveOnDatabase({
+                    title: input.value,
+                    stage_id: tasks.parentElement.parentElement.getAttribute('data-id')
+                });
+                input.remove();
+            });
         }
+
+        // Save on database
+        function saveOnDatabase(data) {
+            $.ajax({
+                    type: 'POST',
+                    url: '/project/task/add',
+                    data: data,
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                }).fail(err => { console.log(err) });
+        }
+
+        const stageCardBtn = Array.from(document.querySelectorAll('.stage-card-body button'));
+
+        // add click event on tasks
+        stageCardBtn.forEach(function(btn) { 
+            btn.addEventListener('click', createTask);
+        });
+ 
     </script>
 @stop
