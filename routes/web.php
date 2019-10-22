@@ -17,6 +17,7 @@ Route::get('/', 'ProjectController@index');
 Route::post('/project/add', 'ProjectController@create')->name('project.create');
 Route::delete('/project/delete', 'ProjectController@delete')->name('project.delete');
 Route::get('/project/{id}', 'ProjectController@project')->name('project.board');
+Route::put('/project/favorite', 'ProjectController@favorite')->name('project.favorite');
 
 Route::post('/project/stage/add', 'StageController@create')->name('stage.create');
 

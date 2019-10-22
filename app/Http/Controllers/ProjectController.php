@@ -57,6 +57,19 @@ class ProjectController extends Controller
     }
 
     /**
+     * Mark or unmark a project as favorite
+     * 
+     * @return App\Project
+    */
+    public function favorite()
+    {
+        $project = Project::findOrFail($this->request->input('project_id'));
+        $project->update($this->request->all());
+
+        return $project;
+    }
+
+    /**
      * Delete the project
      * 
      * @return Illuminate\Routing\Redirector
