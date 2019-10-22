@@ -3,13 +3,20 @@
 @section('css')
     <style>
 
+        li:hover { background-color: rgba(44, 48, 54, 1); }
+
         .btn-stage {
             border-radius: 0!important;
             font-size: 10pt;
             padding: .5em;
         }
 
-        li:hover { background-color: rgba(44, 48, 54, 1); }
+        .btn-tool {
+            margin-left: 1em;
+            color: #fff;
+            border-radius: 50%;
+        }
+
     </style>
 @stop
 
@@ -17,9 +24,18 @@
 
     <div class="d-flex align-items-center">
         <h3>{{ $project->name }}</h3>
-        <button type="button" class="btn btn-gray" style="margin-left: 1em;" onclick="modal.open('stage')">
+        
+        <!-- Favorites -->
+        <button type="button" class="btn btn-gray btn-tool" title="Adicionar / Remover Favoritos">
+            <i class="fas fa-star"></i>
+        </button>
+        <!-- .Favorites -->
+
+        <!-- New stage -->
+        <button type="button" class="btn btn-gray btn-tool" onclick="modal.open('stage')" title="Adicionar novo stage">
             <i class="fas fa-plus-circle"></i>
         </button>
+        <!-- .New Stage -->
     </div>
 
     <div class="divide"></div>

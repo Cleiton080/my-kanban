@@ -257,7 +257,8 @@ a.navbar-brand-text {
   color: #fff;
 }
 
-a.navbar-link {
+a.navbar-link,
+a.nav-link {
   color: #fff;
   text-decoration: none;
 }

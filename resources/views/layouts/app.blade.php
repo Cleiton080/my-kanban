@@ -46,9 +46,11 @@
             <li class="nav-item">
               <i class="fas fa-star"></i> &nbsp;Favoritos
             </li>
-            <li class="nav-item">
-              <i class="fas fa-project-diagram"></i> &nbsp;Projetos
-            </li>
+            <a href="/" class="nav-link">
+              <li class="nav-item">
+                <i class="fas fa-project-diagram"></i> &nbsp;Projetos
+              </li>
+            </a>
             <li class="nav-item">
               <i class="fas fa-users"></i> &nbsp;Equipes
             </li>
@@ -65,20 +67,20 @@
 
         <div class="row">
 
-            <!-- Navbar -->
-            <nav class="navbar">
-                <ul class="navbar-menu">
-                <li class="navbar-item dropdown">
-                    <a href="#" class="navbar-link"> {{ Auth::user()->name }} &nbsp;<i class="fas fa-angle-down"></i></a>
-                    <ul class="dropdown-menu" style="top: 3.6em; right: 0;">
-                    <li>Settings</li>
-                    <li>Help</li>
-                    <li>Logout</li>
-                    </ul>
-                </li>
+          <!-- Navbar -->
+          <nav class="navbar">
+            <ul class="navbar-menu">
+              <li class="navbar-item dropdown">
+                <a href="#" class="navbar-link"> {{ Auth::user()->name }} &nbsp;<i class="fas fa-angle-down"></i></a>
+                <ul class="dropdown-menu" style="top: 3.6em; right: 0;">
+                  <li>Configurações</li>
+                  <li>Ajuda</li>
+                  <li>Sair</li>
                 </ul>
-            </nav>
-            <!-- .Navbar -->
+              </li>
+            </ul>
+          </nav>
+          <!-- .Navbar -->
 
           <section class="container">
             @yield('content')
