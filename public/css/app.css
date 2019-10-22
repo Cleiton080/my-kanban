@@ -69,6 +69,8 @@ a:hover { text-decoration: underline; }
 
 form { width: 100%; }
 
+label { font-weight: bold; }
+
 .btn { cursor: pointer; }
 
 a.btn {
@@ -141,6 +143,7 @@ a.btn {
   background-color: #434a52;
   color: #fff;
   padding: .5em;
+  margin: .5em 0;
 }
 
 .input-control:focus { background-color: #555b63; }
@@ -399,6 +402,7 @@ ul.navbar-menu {
 .stage-card {
   background-color: #434a52;
   width: 16em;
+  box-shadow: 5px 5px 10px #25282D;
 }
 
 .stage-card,

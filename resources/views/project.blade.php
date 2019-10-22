@@ -15,38 +15,62 @@
 
 @section('content')
 
-    <h3>
-        <i class="fas fa-project-diagram"></i> &nbsp;{{ $project->name }}
-    </h3>
+    <div class="d-flex align-items-center">
+        <h3>{{ $project->name }}</h3>
+        <button type="button" class="btn btn-gray" style="margin-left: 1em;" onclick="modal.open('stage')">
+            <i class="fas fa-plus-circle"></i>
+        </button>
+    </div>
 
     <div class="divide"></div>
 
     <!-- Stages -->
     <div class="d-flex row-wrap">
-        
+
         @foreach($project->stages as $stage)
-            <div class="stage-card" style="flex-grow: 2; margin: 1em;" data-id="{{ $stage->id }}">
-                <div class="stage-card-head d-flex justify-content-between">
-                    <h4>{{ $stage->title }}</h4>
-                    <button type="button" class="btn btn-dark" style="padding: 0 .5em; border-radius: 50%;">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                </div>
-                <div class="stage-card-body">
-                    <ul class="stage-card-tasks">
-                        @foreach($stage->tasks as $task)
-                            <li class="stage-card-task">{{ $task->title }}</li>
-                        @endforeach
-                    </ul>
-                    <button type="button" class="btn btn-block btn-dark" style="font-size: .8em; padding: .5em;">
-                        <i class="fas fa-plus"></i> &nbsp;ADICIONAR NOVA TAREFA
-                    </button>
+            <div class="stage-card-wrapper">
+                <div class="stage-card" style="flex-grow: 2; margin: 1em;" data-id="{{ $stage->id }}">
+                    <div class="stage-card-head d-flex justify-content-between">
+                        <h4>{{ $stage->title }}</h4>
+                        <button type="button" class="btn btn-dark" style="padding: 0 .5em; border-radius: 50%;">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    <div class="stage-card-body">
+                        <ul class="stage-card-tasks">
+                            @foreach($stage->tasks as $task)
+                                <li class="stage-card-task">{{ $task->title }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="btn btn-block btn-dark" style="font-size: .8em; padding: .5em;">
+                            <i class="fas fa-plus"></i> &nbsp;ADICIONAR NOVA TAREFA
+                        </button>
+                    </div>
                 </div>
             </div>
         @endforeach
 
     </div>
     <!-- .Stages -->
+
+    <!-- Modal stage -->
+    @component('components.modal', ['id' => 'stage', 'title' => 'NOVO STAGE'])
+        <form action="{{ route('stage.create') }}" method="post">
+            <div class="modal-body">
+                @csrf
+                <div class="form-group">
+                    <label for="title">Título</label>
+                    <input type="text" name="title" id="title" class="input-control" placeholder="digite o título do novo stage">
+                </div>
+                <input type="hidden" name="project_id" value="{{ $project->id }}">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-std btn-gray" onclick="modal.close()">Cancelar</button>
+                <button type="submit" class="btn btn-std btn-blue">Salvar</button>
+            </div>
+        </form>
+    @endcomponent
+    <!-- .Modal stage -->
 
 @stop
 

@@ -89,12 +89,6 @@
 @section('script')
     <script>
 
-        // Modal inicial settings
-        const modal = new Modal({
-            fadeIn: 100,
-            fadeOut: 900,
-        });
-
         // Contextmenu
         const ctx = Array.from(document.querySelectorAll('#projects a'));
         const ctxMenuProject = new ContextMenu({
