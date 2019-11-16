@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
     <style media="screen">
 
-      .fa-star { color: #FFC300; }
+      .fa-star { color: #f4a121; }
 
       .fa-project-diagram { color: #46C5D9; }
 
@@ -43,12 +43,14 @@
           </div>
 
           <ul class="nav-body">
-            <li class="nav-item">
-              <i class="fas fa-star"></i> &nbsp;Favoritos
-            </li>
             <a href="/" class="nav-link">
               <li class="nav-item">
                 <i class="fas fa-project-diagram"></i> &nbsp;Projetos
+              </li>
+            </a>
+            <a href="/favorite" class="nav-link">
+              <li class="nav-item">
+                <i class="fas fa-star"></i> &nbsp;Favoritos
               </li>
             </a>
             <li class="nav-item">

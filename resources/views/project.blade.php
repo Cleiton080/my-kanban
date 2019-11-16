@@ -17,8 +17,6 @@
             border-radius: 50%;
         }
 
-        .favorite-noactive { color: #fff; }
-
     </style>
 @stop
 
@@ -27,11 +25,11 @@
     <div class="d-flex align-items-center">
         <h3>{{ $project->name }}</h3>
         
-        <!-- Favorites -->
-        <button type="button" id="favorite" class="btn btn-gray btn-tool" title="Adicionar / Remover Favoritos" data-id="{{ $project->id }}">
-            <i class="fas fa-star {{ $project->favorite ? 'favorite-active' : 'favorite-noactive' }}"></i>
+        <!-- Favorite -->
+        <button type="button" id="favorite" class="btn btn-gray btn-tool" title="Adicionar / Remover dos Favoritos" data-id="{{ $project->id }}">
+            <i class="{{ $project->favorite ? 'fas fa-star' : 'far fa-star' }}"></i>
         </button>
-        <!-- .Favorites -->
+        <!-- .Favorite -->
 
         <!-- New stage -->
         <button type="button" class="btn btn-gray btn-tool" onclick="modal.open('stage')" title="Adicionar novo stage">
@@ -57,7 +55,7 @@
                     <div class="stage-card-body">
                         <ul class="stage-card-tasks">
                             @foreach($stage->tasks as $task)
-                                <li class="stage-card-task">{{ $task->title }}</li>
+                                <li class="stage-card-task" data-id="{{ $task->id }}">{{ $task->title }}</li>
                             @endforeach
                         </ul>
                         <button type="button" class="btn btn-block btn-dark" style="font-size: .8em; padding: .5em;">
@@ -94,4 +92,23 @@
 
 @section('script')
     <script src="{{ asset('js/project.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script>
+        $('.stage-card-tasks').sortable({
+            connectWith: '.stage-card-tasks',
+            stop: function(e, ui) {
+                const o = {
+                    stage_id: ui.item.parents('.stage-card')[0].getAttribute('data-id'),
+                    task_id: ui.item[0].getAttribute('data-id')
+                }
+
+                $.ajax({
+                   type: 'PUT',
+                   url: '/project/task/update',
+                   data: o,
+                   headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } 
+                }).fail(e => { console.log(e) });
+            }
+        });
+    </script>
 @stop

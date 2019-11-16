@@ -27,7 +27,7 @@ function createTask(e) {
     });
 }
 
-// Save on database
+// Save task on database
 function saveTaskOnDatabase(data) {
     $.ajax({
             type: 'POST',
@@ -37,30 +37,45 @@ function saveTaskOnDatabase(data) {
         }).fail(err => { console.log(err) });
 }
 
-// Mark the project as favorite
-function markAsFavorite(e) {
-    let icon = e.target.querySelector('.fa-star');
-    let project_id = e.originalTarget.getAttribute('data-id');
+// Remove project on favorite list
+function unmarkFavorite(project) {
 
-    if(icon.classList.contains('favorite-active')) {
-        
-        icon.classList.remove('favorite-active');
-        icon.classList.add('favorite-noactive');
-        saveAsFavorite({ favorite: 0, project_id: project_id });
+    if(!project.favorite.classList.contains('fas'))
+        return false;
 
-    } else {
+    project.favorite.classList.remove('fas');
+    project.favorite.classList.add('far');
 
-        icon.classList.remove('favorite-noactive');
-        icon.classList.add('favorite-active');
-        saveAsFavorite({ favorite: 1, project_id: project_id });
-    }
+    return { project_id: project.id, favorite: 0 };
 }
 
-// Update project mark or unmark as favorite
-function saveAsFavorite(data) {
+// Add project on favorite list
+function markFavorite(project) {
+
+    if(project.favorite.classList.contains('fas'))
+        return false;
+
+    project.favorite.classList.remove('far');
+    project.favorite.classList.add('fas');
+
+    return { project_id: project.id, favorite: 1 };
+}
+
+// Favorite project
+function favoriteProject(e) {
+    const project = {
+        id: e.originalTarget.getAttribute('data-id'),
+        favorite: e.target.querySelector('.fa-star'),
+    }
+
+    updateFavoriteList(unmarkFavorite(project) || markFavorite(project));
+}
+
+// Update favorite list
+function updateFavoriteList(data) {
     $.ajax({
             type: 'PUT',
-            url: '/project/favorite',
+            url: '/favorite/update',
             data: data,
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
         }).done(response => { console.log(response) })
@@ -74,7 +89,7 @@ stageCardBtn.forEach(function(btn) {
     btn.addEventListener('click', createTask);
 });
 
-// Button to mark the project as favorite
+// Favorite project
 const favorite = document.querySelector('button#favorite');
 
-favorite.addEventListener('click',  markAsFavorite);
+favorite.addEventListener('click',  favoriteProject);
