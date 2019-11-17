@@ -98,12 +98,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script>
 
-      // Modal inicial settings
-      const modal = new Modal({
-          fadeIn: 100,
-          fadeOut: 900,
-      });
-
       // Show / Hidden side nav
       const nav = new Nav('.nav');
       document.querySelector('.nav-swipe').addEventListener('click', function() { nav.click() });

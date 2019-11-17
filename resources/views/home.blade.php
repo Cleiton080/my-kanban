@@ -89,33 +89,23 @@
 @section('script')
     <script type="module">
         import Modal from '/js/Plugins/Modal.js';
+        import ContextMenu from '/js/Plugins/ContextMenu.js';
+        
+        // Contextmenus
+        const contextmenu = new ContextMenu({
+            wrapper: document.querySelectorAll('#projects a'),
+            menu: document.querySelector('.contextmenu')
+        });
 
+        // Modals
         const addModal = new Modal({ modal: document.getElementById('add-project') });
-        const deleteModal = new Modal({ modal: document.getElementById('delete-project') });
-
-    </script>
-
-    <script>
-
-        // Contextmenu
-        const ctx = Array.from(document.querySelectorAll('#projects a'));
-        const ctxMenuProject = new ContextMenu({
-            menu: document.querySelector('.contextmenu'),
-            display: {
-                show: 'block',
-                hidden: 'none'
+        const deleteModal = new Modal({
+            modal: document.getElementById('delete-project'),
+            opening: function() {
+                this.querySelector('input[name=id-project]').value = contextmenu.lastEventElement.getAttribute('data-id');
             }
         });
 
-        // ...
-        const ctxClickRight = e => {
-            ctxMenuProject.clickRight(e);
-            bindId(ctxMenuProject.parentElement.getAttribute('data-id'), 'input[name=id-project]');
-        }
-        
-        // Event's contextmenu
-        ctx.forEach(e => { e.addEventListener('contextmenu', ctxClickRight) })
-        window.addEventListener('click', e => { ctxMenuProject.clickLeft(e) });
 
     </script>
 @stop
