@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('css')
+<style>
+    .btn-xl {
+        flex-grow: 2;
+        margin: .2em;
+    }
+</style>
+@stop
+
 @section('content')
 
     <h3>

@@ -32,7 +32,7 @@
         <!-- .Favorite -->
 
         <!-- New stage -->
-        <button type="button" class="btn btn-gray btn-tool" onclick="modal.open('stage')" title="Adicionar novo stage">
+        <button type="button" class="btn btn-gray btn-tool" data-target="#add-stage" title="Adicionar novo stage">
             <i class="fas fa-plus-circle"></i>
         </button>
         <!-- .New Stage -->
@@ -48,9 +48,19 @@
                 <div class="stage-card" style="flex-grow: 2; margin: 1em;" data-id="{{ $stage->id }}">
                     <div class="stage-card-head d-flex justify-content-between">
                         <h4>{{ $stage->title }}</h4>
-                        <button type="button" class="btn btn-dark" style="padding: 0 .5em; border-radius: 50%;">
-                            <i class="fas fa-ellipsis-v"></i>
-                        </button>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-dark" style="padding: 0 .5em; border-radius: 50%;">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item">
+                                    Renomear
+                                </li>
+                                <li class="dropdown-item" data-target="#delete-stage">
+                                    Deletar
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="stage-card-body">
                         <ul class="stage-card-tasks">
@@ -69,8 +79,8 @@
     </div>
     <!-- .Stages -->
 
-    <!-- Modal stage -->
-    @component('components.modal', ['id' => 'stage', 'title' => 'NOVO STAGE'])
+    <!-- Modal add stage -->
+    @component('components.modal', ['id' => 'add-stage', 'title' => 'NOVO STAGE'])
         <form action="{{ route('stage.create') }}" method="post">
             <div class="modal-body">
                 @csrf
@@ -81,16 +91,51 @@
                 <input type="hidden" name="project_id" value="{{ $project->id }}">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-std btn-gray" onclick="modal.close()">Cancelar</button>
+                <button type="button" class="btn btn-std btn-gray" data-dismiss="#add-stage">Cancelar</button>
                 <button type="submit" class="btn btn-std btn-blue">Salvar</button>
             </div>
         </form>
     @endcomponent
-    <!-- .Modal stage -->
+    <!-- .Modal add stage -->
+
+    <!-- Modal delete stage -->
+    @component('components.modal', ['id' => 'delete-stage', 'title' => 'DELETAR STAGE'])
+        <form action="{{ route('stage.delete') }}" method="post">
+            <div class="modal-body">
+                <p>
+                    <strong>Você realmente deseja deletar o stage selecionado?</strong><br><br>
+                    <i>O item irá ser deletado imediatamente, a ação não poderá ser desfeita.</i>
+                </p>
+                <input type="hidden" name="stage_id">
+                @method('delete')
+                @csrf
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-std btn-blue" data-dismiss="#delete-stage">Cancelar</button>
+                <button type="submit" class="btn btn-std btn-gray">Deletar</button>
+            </div>
+        </form>
+    @endcomponent
+    <!-- .Modal delete stage -->
 
 @stop
 
 @section('script')
+    <script type="module">
+        import Modal from '/js/Plugins/Modal.js';
+
+        const deleteStage = new Modal({
+            modal: document.getElementById('delete-stage'),
+            opening: function(e) {
+                this.querySelector('input[name=stage_id]').value = e.closest('.stage-card').getAttribute('data-id');
+            }
+        });
+
+        const addStage = new Modal({
+            modal: document.getElementById('add-stage'),
+        });
+        
+    </script>
     <script src="{{ asset('js/project.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script>

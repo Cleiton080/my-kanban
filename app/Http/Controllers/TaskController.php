@@ -31,4 +31,15 @@ class TaskController extends Controller
 
         return $task ? $task : false;
     }
+
+    /**
+     * Update a task
+    */
+    public function update()
+    {
+        $task = Task::findOrFail($this->request->input('task_id'));
+        $task->update($this->request->all());
+
+        return $task;
+    }
 }

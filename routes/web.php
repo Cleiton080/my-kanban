@@ -19,6 +19,7 @@ Route::delete('/project/delete', 'ProjectController@delete')->name('project.dele
 Route::get('/project/{id}', 'ProjectController@project')->name('project.board');
 
 Route::post('/project/stage/add', 'StageController@create')->name('stage.create');
+Route::delete('/project/stage/delete', 'StageController@delete')->name('stage.delete');
 
 Route::post('/project/task/add', 'TaskController@create')->name('task.create');
 Route::put('/project/task/update', 'TaskController@update');
