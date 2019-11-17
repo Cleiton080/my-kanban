@@ -20,6 +20,8 @@ Route::get('/project/{id}', 'ProjectController@project')->name('project.board');
 
 Route::post('/project/stage/add', 'StageController@create')->name('stage.create');
 Route::delete('/project/stage/delete', 'StageController@delete')->name('stage.delete');
+Route::get('/project/stage/{id}', 'StageController@stage');
+Route::put('/project/stage/update', 'StageController@update')->name('stage.update');
 
 Route::post('/project/task/add', 'TaskController@create')->name('task.create');
 Route::put('/project/task/update', 'TaskController@update');

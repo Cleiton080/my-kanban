@@ -53,7 +53,7 @@
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-item">
+                                <li class="dropdown-item" data-target="#rename-stage">
                                     Renomear
                                 </li>
                                 <li class="dropdown-item" data-target="#delete-stage">
@@ -118,12 +118,33 @@
     @endcomponent
     <!-- .Modal delete stage -->
 
+    <!-- Rename stage -->
+    @component('components.modal', ['id' => 'rename-stage', 'title' => 'RENOMEAR STAGE'])
+        <form action="{{ route('stage.update') }}" method="post">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="title">título</label>
+                    <input type="text" id="title" class="input-control" name="title" placeholder="digite o título do stage">
+                </div>
+                <input type="hidden" name="stage_id">
+                @method('put')
+                @csrf
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-std btn-blue">Salvar</button>
+                <button type="button" class="btn btn-std btn-gray" data-dismiss="#rename-stage">Cancelar</button>
+            </div>
+        </form>
+    @endcomponent
+    <!-- .Rename stage -->
+
 @stop
 
 @section('script')
     <script type="module">
         import Modal from '/js/Plugins/Modal.js';
 
+        // Modals
         const deleteStage = new Modal({
             modal: document.getElementById('delete-stage'),
             opening: function(e) {
@@ -134,7 +155,17 @@
         const addStage = new Modal({
             modal: document.getElementById('add-stage'),
         });
-        
+
+        const renameStage = new Modal({
+            modal: document.getElementById('rename-stage'),
+            opening: function(e) {
+                let stage = e.closest('.stage-card').getAttribute('data-id');
+                $.get(`/project/stage/${stage}`, data => {
+                    this.querySelector('#title').value = data.title;
+                    this.querySelector('input[name=stage_id]').value = data.id;
+                });
+            }
+        });
     </script>
     <script src="{{ asset('js/project.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
