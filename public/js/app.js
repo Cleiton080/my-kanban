@@ -3,32 +3,6 @@ function bindId(id, match) {
 
     return field ? true : false
 }
-
-/**
- * Modal
-*/
-function Modal(modal) {
-    this.fadeIn = modal.fadeIn;
-    this.fadeOut = modal.fadeOut;
-}
-  
-Modal.prototype.open = function(id) {
-    let modal = document.querySelector(`#${id}`);
-
-    modal.classList.contains('modal-show') || modal.classList.add('modal-show');
-    setTimeout(function(){ modal.classList.add('modal-fadeIn'); }, this.fadeIn);
-}
-  
-Modal.prototype.close = function() {
-    let modal = document.querySelector('.modal-show');
-
-    modal.classList.add('modal-fadeOut');
-    setTimeout(function(){
-        modal.classList.remove('modal-fadeIn');
-        modal.classList.remove('modal-fadeOut');
-        modal.classList.remove('modal-show');
-    }, this.fadeOut)
-}
   
 /**
  * Nav

@@ -31,7 +31,7 @@
         <div class="contextmenu">
             <ul>
                 <li style="border-bottom: 1px solid #363b41;">Abrir</li>
-                <li onclick="modal.open('delete')">Deletar</li>
+                <li data-target="#delete-project">Deletar</li>
             </ul>
         </div>
         <!-- .Contextmenu -->
@@ -42,13 +42,13 @@
 
     <!-- New project button -->
     <div class="">
-        <button type="button" class="btn btn-block btn-xl btn-dark" onclick="modal.open('newProject')">
+        <button type="button" class="btn btn-block btn-xl btn-dark" data-target="#add-project">
             <i class="fas fa-plus"></i> &nbsp;NOVO PROJETO
         </button>
     </div>
     <!-- .New project button -->
 
-    @component('components.modal', ['id' => 'newProject', 'title' => 'NOVO PROJETO'])
+    @component('components.modal', ['id' => 'add-project', 'title' => 'NOVO PROJETO'])
         <form method="post" action="{{ route('project.create') }}">
             <div class="modal-body">
                 @csrf
@@ -60,13 +60,13 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-std btn-gray" onclick="modal.close()">Cancelar</button>
+                <button type="button" class="btn btn-std btn-gray" data-dismiss="#add-project">Cancelar</button>
                 <button type="submit" class="btn btn-std btn-blue">Salvar</button>
             </div>
         </form>
     @endcomponent
 
-    @component('components.modal', ['id' => 'delete', 'title' => 'DELETAR PROJETO'])
+    @component('components.modal', ['id' => 'delete-project', 'title' => 'DELETAR PROJETO'])
         <form action="{{ route('project.delete') }}" method="post">
             <div class="modal-body">
                 <p>
@@ -78,7 +78,7 @@
                 <input type="hidden" name="id-project">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-std btn-blue" onclick="modal.close()">Cancelar</button>
+                <button type="button" class="btn btn-std btn-blue" data-dismiss="#delete-project">Cancelar</button>
                 <button type="submit" class="btn btn-std btn-gray">Deletar</button>
             </div>
         </form>
@@ -87,6 +87,14 @@
 @stop
 
 @section('script')
+    <script type="module">
+        import Modal from '/js/Plugins/Modal.js';
+
+        const addModal = new Modal({ modal: document.getElementById('add-project') });
+        const deleteModal = new Modal({ modal: document.getElementById('delete-project') });
+
+    </script>
+
     <script>
 
         // Contextmenu
