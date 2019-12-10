@@ -39,6 +39,7 @@
             <div class="nav-user">
               <img src="http://www.urhobosocialclublagos.com/wp-content/uploads/2017/07/default-avatar-ginger-guy.png" class="user-profile">
               <p>{{ Auth::user()->name }} <br> {{ Auth::user()->email }} </p>
+              <span>Alpha v0.5</span>
             </div>
           </div>
 
@@ -56,7 +57,7 @@
             <li class="nav-item">
               <i class="fas fa-users"></i> &nbsp;Equipes
             </li>
-            <li class="nav-item" onclick="modal.open('github')">
+            <li class="nav-item">
               <i class="fab fa-github"></i> &nbsp;Github
             </li>
           </ul>
