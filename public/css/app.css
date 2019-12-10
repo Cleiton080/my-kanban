@@ -69,7 +69,16 @@ a:hover { text-decoration: underline; }
 
 form { width: 100%; }
 
+label { font-weight: bold; }
+
 .btn { cursor: pointer; }
+
+a.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
 
 .btn-std {
   width: 5em;
@@ -133,7 +142,8 @@ form { width: 100%; }
 .input-control {
   background-color: #434a52;
   color: #fff;
-  padding: .3em;
+  padding: .5em;
+  margin: .5em 0;
 }
 
 .input-control:focus { background-color: #555b63; }
@@ -247,7 +257,8 @@ a.navbar-brand-text {
   color: #fff;
 }
 
-a.navbar-link {
+a.navbar-link,
+a.nav-link {
   color: #fff;
   text-decoration: none;
 }
@@ -388,3 +399,27 @@ ul.navbar-menu {
 .contextmenu,
 .contextmenu ul,
 .contextmenu li { border-radius: .3em; }
+
+.stage-card {
+  background-color: #434a52;
+  width: 16em;
+  box-shadow: 5px 5px 10px #25282D;
+}
+
+.stage-card,
+.stage-card-task { border-radius: .2em; }
+
+.stage-card-head,
+.stage-card-body,
+.stage-card-task { padding: .5em; }
+
+.stage-card-tasks {
+  list-style: none;
+  margin: .2em;
+}
+
+.stage-card-task {
+  background-color: #25282D;
+  margin-bottom: .5em;
+  cursor: pointer;
+}
