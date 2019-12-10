@@ -23,7 +23,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Project index
+     * Projects list
      * 
      * @return Illuminate\View\View
     */
@@ -32,6 +32,16 @@ class ProjectController extends Controller
         $allProjects = Project::all();
 
         return view('home')->with('allProjects', $allProjects);
+    }
+
+    /**
+     * Project board
+    */
+    public function project($id) 
+    {
+        $project = Project::with('stages')->findOrFail($id);
+
+        return view('project')->with('project', $project);
     }
 
     /**
@@ -44,6 +54,19 @@ class ProjectController extends Controller
         $project = Project::create($this->request->all());
 
         return redirect()->back();
+    }
+
+    /**
+     * Mark or unmark a project as favorite
+     * 
+     * @return App\Project
+    */
+    public function favorite()
+    {
+        $project = Project::findOrFail($this->request->input('project_id'));
+        $project->update($this->request->all());
+
+        return $project;
     }
 
     /**
